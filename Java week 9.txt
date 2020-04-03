@@ -1,0 +1,186 @@
+// Question 1
+
+char[] charArray = input.toCharArray();
+char operator = charArray[1];
+
+double a = (double)(charArray[0] - '0');
+double b = (double)(charArray[2] - '0');
+
+if(operator == '+')
+	System.out.print(input + " = "+Math.round(a+b));
+else if(operator == '-')
+	System.out.print(input + " = "+Math.round(a-b));
+else if(operator == '*')
+	System.out.print(input + " = "+Math.round(a*b));
+else if(operator == '/')
+	System.out.print(input + " = "+Math.round(a/b));
+else
+	System.out.print(input + " = "+Math.round(a%b));
+
+// Question 2
+
+String num1 = "";
+String num2 = "";
+char op = 'a';
+int equal = 0;
+int flag = 0;
+int j = 0;
+int check = 0;
+int ch = 0;
+
+char[] charArray = input.toCharArray();
+char[] numArray = new char[input.length()];
+for(int i = 0; i < input.length(); i++){
+	if(charArray[i] < 'a' || charArray[i] > 'p'){
+		check = 1;
+		break;
+	}
+	if(charArray[i] == 'c')
+		ch = 1;
+	char out = gui_map(charArray[i]);
+	numArray[i] = out;
+	
+	if(out == '+' || out == '-' || out == 'X' || out == '/'){
+		flag = 1;
+		op = out;
+	}
+	if(flag == 0)
+		num1 = num1 + String.valueOf(out);
+	else {
+		if(j == 0){
+			j++;
+			continue;
+		}
+		if(out == '='){
+			equal = 1;
+			break;
+		}
+		num2 = num2 + String.valueOf(out);
+	}
+}
+if(ch == 1 && check == 0){
+	double a = Double.parseDouble(num1);
+	double b = Double.parseDouble(num2);
+	if(op == '+')
+		System.out.print(a+b);
+	else if(op == '-')
+		System.out.print(a-b);
+	else if(op == 'X')
+		System.out.print(a*b);
+	else if(op == '/')
+		System.out.print(a/b);
+}
+
+// Question 3
+
+String arr[] = new String[5];
+for(int i = 0; i < 5; i++){
+	arr[i] = sc.nextLine();
+}
+
+char matrix[][] = new char[5][5];
+for(int i = 0; i < 5; i++){
+	char[] chararray = arr[i].toCharArray();
+	for(int j = 0; j < 5; j++){
+		matrix[i][j] = chararray[j];
+	}
+}
+
+char newmatrix[][] = new char[5][5];
+for(int i = 0; i < 5; i++){
+	for(int j = 0; j < 5; j++){
+		if(i == 0 && j < 3)
+			newmatrix[i][j+2] =  matrix[i][j];
+		else if(i == 0 && j == 3)
+			newmatrix[i+1][j+1] = matrix[i][j];
+		else if(i < 3 && j == 4)
+			newmatrix[i+2][j] = matrix[i][j];
+		else if(i == 3 && j == 4)
+			newmatrix[i+1][j-1] = matrix[i][j];
+		else if(i == 4 && j > 1)
+			newmatrix[i][j-2] = matrix[i][j];
+		else if(i == 4 && j == 1)
+			newmatrix[i-1][j-1] = matrix[i][j];
+		else if(i > 1 && j == 0)
+			newmatrix[i-2][j] = matrix[i][j];
+		else if(i == 1 && j == 0)
+			newmatrix[i-1][j+1] = matrix[i][j];
+		else if(i == 1 && j > 0 && j < 4){
+			if(j == 3)
+				newmatrix[i+1][j] = matrix[i][j];
+			else
+				newmatrix[i][j+1] = matrix[i][j];
+		}
+		
+		else if(i == 2 && j > 0 && j < 4){
+			if(j == 2)
+				newmatrix[i][j] = matrix[i][j];
+			else if (j == 3)
+				newmatrix[i+1][j] = matrix[i][j];
+			else 
+				newmatrix[i-1][j] = matrix[i][j];
+		}
+		else {
+			if(j == 1)
+				newmatrix[i-1][j] = matrix[i][j];
+			else
+				newmatrix[i][j-1] = matrix[i][j];
+		}		
+	}
+}
+
+for(int i = 0; i < 5; i++){
+	for(int j = 0; j < 5; j++){
+		System.out.print(newmatrix[i][j]);
+	}
+	System.out.println();
+}
+
+//Question 4
+
+String arr[] = new String[5];
+char matrix[][] = new char[5][5];
+int i, j, k = 0;
+for(j = 0; j < 5; j++){
+	arr[j] = sc.nextLine();
+}
+
+for(i = 0; i < 5; i++){
+	for(j = 4, k = 0; j >= 0; j--, k++){
+		matrix[i][k] = arr[i].charAt(j);
+	}
+}
+
+for(i = 0; i < 5; i++){
+	for(j = 0; j < 5; j++){
+		System.out.print(matrix[i][j]);
+	}
+	System.out.println();
+}
+
+// Question 5
+
+String arr[] = new String[5];
+for(int i = 0; i < 5; i++){
+	arr[i] = sc.nextLine();
+}
+
+char matrix[][] = new char[5][5];
+for(int i = 0; i < 5; i++){
+	char[] chararray = arr[i].toCharArray();
+	for(int j = 0; j < 5; j++){
+		matrix[i][j] = chararray[j];
+	}
+}
+
+for(int i = 0; i < 5; i++){
+	for(int j = 0; j < 5; j++){
+		if(matrix[i][j] == '0')
+			System.out.print('1');
+		else
+			System.out.print('0');			
+	}
+	System.out.println();
+}
+
+// ML :)//
